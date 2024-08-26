@@ -5,14 +5,19 @@ const API_URL = 'http://localhost:3000/api/profile';
 // Define an interface for the profile data
 interface Profile {
   name: string;
-  age: number;
   email: string;
+  phone: string;
   // Add other fields as needed
 }
 
 export const getProfile = async (userId: string): Promise<Profile> => {
+  console.log('getProfile');
   try {
+    console.log('calling axios.get()');
+    console.log('userId: ' + userId);
+    console.log('API_URL: ' + API_URL);
     const response = await axios.post<Profile>(API_URL, { userId });
+    console.log('response: ' + response);
     return response.data;
   } catch (error) {
     console.error('Error fetching profile data:', error);

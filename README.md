@@ -1,28 +1,17 @@
-# REAI-APP with React / Express app written in TS (see https://github.com/bfeist/vite-express-ts)
+# REAI-APP with React / Express app written in TS 
+(see https://github.com/bfeist/vite-express-ts)
 
 ## Description
 
 This is a web application for AI document management that integrates React, Vite, Express, and TypeScript. This setup provides a robust development environment with hot module replacement for the frontend and an efficient build system for both frontend and backend.
 
+see https://docs.google.com/document/d/125ul91LyH6FOSfdfFCPnAuwxbJytRhJ7MumdKS3Mk5U/edit?usp=drive_link
+
 ## Features
 
-- React for building user interfaces.
-- Vite (with swc) for an ultra-fast frontend development experience.
-  - Includes css modules
-- Vite for front-end builds
-- Express for API endpoints
-- TypeScript for adding type safety to JavaScript.
-- vscode debugging for frontend / backend
-- Esbuild for efficient backend builds.
-- Proxying of api endpoints through Vite environment during development
-- Common typings between frontend and backend
-- esLint with rules from recent projects
-- prettier with the standard rules
-- Jest testing setup with one example test file
-- File-based routing (`/src/pages` for all routes)
-- `/src/public` for static assets
-- Docker deployment working
-  - Only `prod` setup for now
+- Sign up / Log in
+- Profile update
+
 
 ### Notes
 

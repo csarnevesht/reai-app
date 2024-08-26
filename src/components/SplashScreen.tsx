@@ -3,23 +3,27 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const SplashScreen: React.FC = () => {
+  console.log('SplashScreen');
   const navigate = useNavigate();
-  const { currentUser } = useAuth();
+  const authContext = useAuth();
 
   useEffect(() => {
-    setTimeout(() => {
-      if (currentUser) {
+    console.log('SplashScreen useEffect');
+    const timer = setTimeout(() => {
+      if (authContext?.currentUser) {
+        console.log('User is logged in');
         navigate('/my-docs');
       } else {
+        console.log('User is not logged in');
         navigate('/login');
       }
     }, 3000);
-  }, [currentUser, navigate]);
+
+    return () => clearTimeout(timer); // Cleanup the timeout on component unmount
+  }, [authContext, navigate]);
 
   return (
-    <div className="splash-screen">
-      <h1>RE-AI APP</h1>
-    </div>
+    <div>Loading...</div>
   );
 };
 

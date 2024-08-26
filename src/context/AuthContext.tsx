@@ -5,9 +5,11 @@ import { firebaseAuth, googleProvider, facebookProvider } from '../firebase';
 import React, { useEffect, createContext, useContext, useState, ReactNode } from 'react';
 
 // Define an interface for the context value
-interface AuthContextType {
+export interface AuthContextType {
   currentUser: User | null;
   signupWithEmail: (email: string, password: string) => Promise<void>;
+  loginWithGoogle: () => Promise<void>;
+  loginWithFacebook: () => Promise<void>; 
   // Add other methods or properties as needed
 }
 
@@ -25,6 +27,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const unsubscribe = onAuthStateChanged(firebaseAuth, (user: User | null) => {
       console.log('onAuthStateChanged');
       console.log('user: ' + user);
+      console.log('user name: ' + user?.displayName);
       setCurrentUser(user);
     });
     return unsubscribe;
@@ -32,7 +35,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   const loginWithGoogle = async (): Promise<void> => {
     console.log('loginWithGoogle');
-    signInWithPopup(firebaseAuth, googleProvider);
+    signInWithPopup(firebaseAuth, googleProvider).then((result) => {     
+      console.log('result: ' + result);
+      console.log('result user: ' + result.user);
+      console.log('result user name: ' + result.user?.displayName);
+    } );  
   };
 
   const loginWithFacebook = async (): Promise<void> => {
@@ -45,8 +52,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     createUserWithEmailAndPassword(firebaseAuth, email, password);
   };
 
+
   console.log('returning AuthContext.Provider');
-  console.log('currentUser: ' + currentUser);
+  console.log('currentUser name: ' + currentUser?.displayName);
   return (
     <AuthContext.Provider value={{ currentUser, loginWithGoogle, loginWithFacebook, signupWithEmail }}>
       {children}
@@ -58,3 +66,5 @@ export const useAuth = (): AuthContextType | null => {
   console.log('useAuth');
   return useContext(AuthContext);
 };
+
+export default AuthContextType;

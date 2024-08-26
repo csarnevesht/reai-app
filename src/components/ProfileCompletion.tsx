@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { getProfile, updateProfile } from '../services/profileService';
 
+
 interface Profile {
   name: string;
   email: string;
@@ -10,26 +11,34 @@ interface Profile {
 }
 
 const ProfileCompletion: React.FC = () => {
-  const { currentUser } = useAuth();
+  console.log('ProfileCompletion');
+  const { currentUser } = useAuth() || {};
+  console.log('currentUser name: ' + currentUser?.displayName);
   const navigate = useNavigate();
   const [profile, setProfile] = useState<Profile>({ name: '', email: '', phone: '' });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    console.log('ProfileCompletion::useEffect');
     const fetchProfile = async () => {
+      console.log('fetchProfile');
       if (currentUser) {
-        console.log('fetching profile');
-        try {
-          const profileData = await getProfile(currentUser.uid) as Profile | null;
-          if (profileData && profileData.name && profileData.email && profileData.phone) {
-            setProfile(profileData);
-            navigate('/my-docs');
-          }
-        } catch (error) {
-          console.error('Failed to fetch profile:', error);
-        } finally {
-          setLoading(false);
-        }
+        getProfile(currentUser.uid)
+          .then(profileData => {
+            if (profileData) {
+              setProfile(profileData);
+              navigate('/my-docs');
+            } else {
+              setProfile({ name: '', email: '', phone: '' });
+            }
+            setLoading(false);
+          })
+          .catch(error => {
+            console.error('Failed to fetch profile:', error);
+            setLoading(false);
+          });
+      } else {
+        setLoading(false);
       }
     };
 
@@ -54,7 +63,7 @@ const ProfileCompletion: React.FC = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>Profile Completion Loading...</div>;
   }
 
   return (
