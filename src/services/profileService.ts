@@ -1,0 +1,31 @@
+import axios from 'axios';
+
+const API_URL = 'http://localhost:3000/api/profile';
+
+// Define an interface for the profile data
+interface Profile {
+  name: string;
+  age: number;
+  email: string;
+  // Add other fields as needed
+}
+
+export const getProfile = async (userId: string): Promise<Profile> => {
+  try {
+    const response = await axios.post<Profile>(API_URL, { userId });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching profile data:', error);
+    throw error;
+  }
+};
+
+export const updateProfile = async (userId: string, profile: Profile): Promise<Profile> => {
+  try {
+    const response = await axios.put<Profile>(API_URL, { userId, profile });
+    return response.data;
+  } catch (error) {
+    console.error('Error updating profile data:', error);
+    throw error;
+  }
+};
