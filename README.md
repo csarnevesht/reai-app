@@ -1,4 +1,4 @@
-# REAI-APP with React / Express app written in TS
+# REAI-APP with React / Express app written in TS (see https://github.com/bfeist/vite-express-ts)
 
 ## Description
 
