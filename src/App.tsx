@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SplashScreen from './components/SplashScreen';
 import Login from './components/Login';
 import Registration from './components/Registration';
-import ProfileCompletion from './components/ProfileCompletion';
+import Profile from './components/Profile';
 import MyDocs from './components/MyDocs';
 import UploadDocument from './components/UploadDocument';
 import DocumentSharing from './components/DocumentSharing';
@@ -19,7 +19,7 @@ const App: React.FC = () => {
           <Route path="/" element={<SplashScreen />} />
           <Route path="/login" element={<Login />} />
           <Route path="/registration" element={<Registration />} />
-          <Route path="/profile-completion" element={<ProfileCompletion />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/my-docs" element={<MyDocs />} />
           <Route path="/upload-document" element={<UploadDocument />} />
           <Route path="/document-sharing" element={<DocumentSharing />} />

@@ -20,9 +20,8 @@ const Login: React.FC = () => {
       if(signupWithEmail) {
         signupWithEmail(email, password).then(() => {
           console.log('Signed up successfully');
-          // const navigate = useNavigate();
-          // console.log('Navigating to profile-completion');
-          // navigate('profile-completion');
+          console.log('Navigating to profile');
+          navigate('/profile');
         }).catch((error) => {
           console.error('Failed to sign up:', error);
         } );
@@ -41,8 +40,8 @@ const Login: React.FC = () => {
         console.log('loginWithGoogle');
         loginWithGoogle().then(() => {
           console.log('logged in with google successfully');
-          console.log('Navigating to profile-completion');
-          navigate('profile-completion');
+          console.log('Navigating to profile');
+          navigate('/profile');
         }).catch((error) => {
           console.error('Failed to log in:', error);
         } );
@@ -62,8 +61,8 @@ const Login: React.FC = () => {
         }).catch((error) => {
           console.error('Failed to log in:', error);
         } );
-        console.log('Navigating to profile-completion');
-        navigate('profile-completion');
+        console.log('Navigating to profile');
+        navigate('/profile');
       }
     }
   };

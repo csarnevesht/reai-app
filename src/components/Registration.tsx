@@ -21,8 +21,8 @@ const Registration: React.FC = () => {
       if(signupWithEmail) {
         signupWithEmail(email, password).then(() => {
           console.log('Signed up successfully');
-          console.log('Navigating to profile-completion');
-          navigate('profile-completion');
+          console.log('Navigating to profile');
+          navigate('profile');
         }).catch((error) => {
           console.error('Failed to sign up:', error);
         } );

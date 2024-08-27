@@ -4,22 +4,22 @@ import { useAuth } from '../context/AuthContext';
 import { getProfile, updateProfile } from '../services/profileService';
 
 
-interface Profile {
+interface ProfileType {
   name: string;
   email: string;
   phone: string;
 }
 
-const ProfileCompletion: React.FC = () => {
-  console.log('ProfileCompletion');
+const Profile: React.FC = () => {
+  console.log('Profile');
   const { currentUser } = useAuth() || {};
   console.log('currentUser name: ' + currentUser?.displayName);
   const navigate = useNavigate();
-  const [profile, setProfile] = useState<Profile>({ name: '', email: '', phone: '' });
+  const [profile, setProfile] = useState<ProfileType>({ name: '', email: '', phone: '' });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log('ProfileCompletion::useEffect');
+    console.log('Profile::useEffect');
     const fetchProfile = async () => {
       console.log('fetchProfile');
       if (currentUser) {
@@ -67,7 +67,7 @@ const ProfileCompletion: React.FC = () => {
   }
 
   return (
-    <div className="profile-completion">
+    <div className="profile">
       <h2>Complete Your Profile</h2>
       <form onSubmit={handleSubmit}>
         <div>
@@ -88,4 +88,4 @@ const ProfileCompletion: React.FC = () => {
   );
 };
 
-export default ProfileCompletion;
+export default Profile;
