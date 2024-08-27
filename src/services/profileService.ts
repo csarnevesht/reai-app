@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/api/profile';
+const API_URL = 'http://localhost:9001/api/v1/profile';
 
 // Define an interface for the profile data
 interface Profile {

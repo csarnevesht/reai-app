@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useAuth, AuthContextType } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 import 'node-polyfill-webpack-plugin';
 
-const LoginSignup: React.FC = () => {
+const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const auth: AuthContextType | null = useAuth();
@@ -86,10 +87,13 @@ const LoginSignup: React.FC = () => {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
-      <button type="submit">Sign Up</button>
+      <button type="submit">Login</button>
+      <h6>
+            Click <Link to="/registration">Here</Link> to sign up
+      </h6>
     </form>
     </div>
   );
 };
 
-export default LoginSignup;
+export default Login;
