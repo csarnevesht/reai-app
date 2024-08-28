@@ -19,7 +19,7 @@ export const getProfile = async (userId: string): Promise<Profile> => {
     const response = await axios.post<Profile>(API_URL, { userId });
     console.log('response: ' + response);
     return response.data;
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Error fetching profile data:', error);
     throw error;
   }
@@ -29,7 +29,7 @@ export const updateProfile = async (userId: string, profile: Profile): Promise<P
   try {
     const response = await axios.put<Profile>(API_URL, { userId, profile });
     return response.data;
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Error updating profile data:', error);
     throw error;
   }

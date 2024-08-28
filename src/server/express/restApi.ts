@@ -3,7 +3,6 @@ import express, { Application } from 'express';
 import cors from 'cors';
 import { Request, Response } from 'express';
 const { OAuth2Client } = require('google-auth-library');
-import { google } from 'googleapis';
 
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
@@ -33,33 +32,7 @@ app.get(`/api/v1/version`, (req: Request, res: Response) => {
 
 const oAuth2Client = new OAuth2Client(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
 oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
-const drive = google.drive({ version: 'v3', auth: oAuth2Client });
 
-app.post('/api/v1/profile', async (req, res) => {
-  try {
-        const response = await drive.files.get({
-          fileId: 'profile.json',
-          alt: 'media',
-        });
-        res.json(response.data);
-  } catch (error) {
-        console.error('Error fetching profile data:', error);
-        res.status(500).send('Internal Server Error');
-  }
-});
-
-app.put('/api/v1/profile', async (req, res) => {
-  try {
-        const response = await drive.files.put({
-          fileId: 'profile.json',
-          alt: 'media',
-        });
-        res.json(response.data);
-  } catch (error) {
-        console.error('Error fetching profile data:', error);
-        res.status(500).send('Internal Server Error');
-  }
-});
 
 app.use(express.static("./.local/vite/dist"));
 
